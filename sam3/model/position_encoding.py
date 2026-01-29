@@ -49,8 +49,8 @@ class PositionEmbeddingSine(nn.Module):
             for size in precompute_sizes:
                 tensors = torch.zeros((1, 1) + size, device=precompute_device)
                 self.forward(tensors)
-                # further clone and detach it in the cache (just to be safe)
-                cache_key = (size[0], size[1], str(precompute_device))
+                # further clone and detach it in the  (just to be safe)
+                cache_key = (size[0], size[1], str(tensors.device))
                 self.cache[cache_key] = self.cache[cache_key].clone().detach()
 
     def _encode_xy(self, x, y):
